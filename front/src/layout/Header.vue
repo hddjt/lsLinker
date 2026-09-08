@@ -13,9 +13,9 @@ const navs = [
   { to: '/', label: '导航' },
   { to: '/forum', label: '论坛' },
   { to: '/favorites', label: '收藏' },
-  { to: '/about', label: '关于' },
   { to: '/chat', label: '聊天' },
   { to: '/transfer', label: '中转', badge: true },
+  { to: '/about', label: '关于' },
 ]
 
 function submitLogin() {

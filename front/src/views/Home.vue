@@ -2,38 +2,19 @@
 import { ref, computed } from 'vue'
 import SiteCard from '../components/SiteCard.vue'
 import SiteFormModal from '../components/SiteFormModal.vue'
+import BaseModal from '../components/BaseModal.vue'
 import { useSites, deleteSite } from '../stores/sites'
 import { isLoggedIn } from '../stores/auth'
+import { useSiteFilter } from '../composables/useSiteFilter'
 
 const { categories, sites } = useSites()
-const kw = ref('')
-const activeCat = ref('all')
+const { kw, activeCat, filtered, grouped, catCounts, isEmpty, noMatch } = useSiteFilter(sites, categories)
+
+const loggedIn = computed(isLoggedIn)
 const showForm = ref(false)
 const editing = ref(null)
-
-const filtered = computed(() => {
-  const q = kw.value.trim().toLowerCase()
-  return sites.filter((s) => {
-    const matchCat = activeCat.value === 'all' || s.category === activeCat.value
-    const matchKw =
-      !q ||
-      s.name.toLowerCase().includes(q) ||
-      s.desc.toLowerCase().includes(q) ||
-      s.url.toLowerCase().includes(q)
-    return matchCat && matchKw
-  })
-})
-
-const grouped = computed(() => {
-  if (activeCat.value !== 'all') {
-    return [{ cat: categories.find((c) => c.id === activeCat.value), list: filtered.value }]
-  }
-  return categories
-    .map((c) => ({ cat: c, list: filtered.value.filter((s) => s.category === c.id) }))
-    .filter((g) => g.list.length)
-})
-
-const catCount = (id) => sites.filter((s) => s.category === id).length
+const showDel = ref(false)
+const pendingDelete = ref(null)
 
 function openAdd() {
   editing.value = null
@@ -45,8 +26,15 @@ function openEdit(site) {
   showForm.value = true
 }
 
-function onDelete(site) {
-  if (confirm(`确定删除站点「${site.name}」？`)) deleteSite(site.id)
+function askDelete(site) {
+  pendingDelete.value = site
+  showDel.value = true
+}
+
+function confirmDelete() {
+  if (pendingDelete.value) deleteSite(pendingDelete.value.id)
+  pendingDelete.value = null
+  showDel.value = false
 }
 </script>
 
@@ -62,14 +50,22 @@ function onDelete(site) {
           <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm opacity-60">🔍</span>
           <input
             v-model="kw"
-            class="input !pl-9"
-            placeholder="搜索站点 / 描述 / 链接"
+            class="input !pr-9 !pl-9"
+            placeholder="搜索站点 / 描述 / 链接 / 分类"
           />
+          <button
+            v-if="kw"
+            class="absolute right-2 top-1/2 -translate-y-1/2 text-sm opacity-60 hover:opacity-100"
+            title="清除"
+            @click="kw = ''"
+          >
+            ✕
+          </button>
         </div>
         <button
           class="btn btn-primary shrink-0"
-          :disabled="!isLoggedIn()"
-          :title="isLoggedIn() ? '新增站点' : '请先登录'"
+          :disabled="!loggedIn"
+          :title="loggedIn ? '新增站点' : '请先登录'"
           @click="openAdd"
         >
           ＋ 新增
@@ -92,11 +88,16 @@ function onDelete(site) {
         :class="{ active: activeCat === c.id }"
         @click="activeCat = c.id"
       >
-        {{ c.name }} <span class="opacity-60">{{ catCount(c.id) }}</span>
+        {{ c.name }} <span class="opacity-60">{{ catCounts[c.id] ?? 0 }}</span>
       </button>
     </div>
 
-    <div v-if="filtered.length === 0" class="glass p-10 text-center text-[--text-mute]">
+    <div v-if="isEmpty" class="glass p-10 text-center text-[--text-mute]">
+      <div class="mb-2 text-3xl">🗂️</div>
+      还没有站点，点击右上角「新增」开始收藏
+    </div>
+
+    <div v-else-if="noMatch" class="glass p-10 text-center text-[--text-mute]">
       <div class="mb-2 text-3xl">🫥</div>
       没有找到匹配的站点
     </div>
@@ -113,11 +114,23 @@ function onDelete(site) {
           :key="s.id"
           :site="s"
           @edit="openEdit"
-          @delete="onDelete"
+          @delete="askDelete"
         />
       </div>
     </div>
 
     <SiteFormModal :open="showForm" :editing="editing" @close="showForm = false" />
+
+    <BaseModal
+      :open="showDel"
+      :title="pendingDelete ? `删除站点「${pendingDelete.name}」？` : ''"
+      @close="showDel = false"
+    >
+      <p class="text-[13px] text-[--text-mute]">该操作不可恢复，确定删除吗？</p>
+      <div class="mt-4 flex justify-end gap-2">
+        <button class="btn btn-ghost" @click="showDel = false">取消</button>
+        <button class="btn btn-primary !bg-[--danger]" @click="confirmDelete">删除</button>
+      </div>
+    </BaseModal>
   </div>
 </template>
