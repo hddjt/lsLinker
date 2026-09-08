@@ -34,25 +34,25 @@ function buildBackground(width, height) {
   c.height = height
   const ctx = c.getContext('2d')
 
-  ctx.fillStyle = cfg.value.opts.background || '#070b22'
+  ctx.fillStyle = cfg.value.opts.background || '#04131d'
   ctx.fillRect(0, 0, width, height)
 
-  const topGlow = ctx.createRadialGradient(width * 0.35, height * 0.18, 0, width * 0.35, height * 0.18, width * 0.58)
-  topGlow.addColorStop(0, 'rgba(94, 73, 214, 0.34)')
-  topGlow.addColorStop(1, 'rgba(94, 73, 214, 0)')
+  const topGlow = ctx.createRadialGradient(width * 0.28, height * 0.16, 0, width * 0.28, height * 0.16, width * 0.54)
+  topGlow.addColorStop(0, 'rgba(52, 213, 195, 0.3)')
+  topGlow.addColorStop(1, 'rgba(52, 213, 195, 0)')
   ctx.fillStyle = topGlow
   ctx.fillRect(0, 0, width, height)
 
-  const bottomGlow = ctx.createRadialGradient(width * 0.73, height * 0.78, 0, width * 0.73, height * 0.78, width * 0.6)
-  bottomGlow.addColorStop(0, 'rgba(32, 101, 163, 0.46)')
-  bottomGlow.addColorStop(1, 'rgba(32, 101, 163, 0)')
+  const bottomGlow = ctx.createRadialGradient(width * 0.76, height * 0.76, 0, width * 0.76, height * 0.76, width * 0.58)
+  bottomGlow.addColorStop(0, 'rgba(242, 191, 114, 0.18)')
+  bottomGlow.addColorStop(1, 'rgba(242, 191, 114, 0)')
   ctx.fillStyle = bottomGlow
   ctx.fillRect(0, 0, width, height)
 
   const shade = ctx.createLinearGradient(0, 0, width, height)
-  shade.addColorStop(0, 'rgba(7, 11, 34, 0)')
-  shade.addColorStop(0.45, 'rgba(16, 19, 75, 0.44)')
-  shade.addColorStop(1, 'rgba(7, 16, 34, 0.72)')
+  shade.addColorStop(0, 'rgba(3, 17, 27, 0)')
+  shade.addColorStop(0.45, 'rgba(8, 35, 53, 0.44)')
+  shade.addColorStop(1, 'rgba(4, 19, 29, 0.72)')
   ctx.fillStyle = shade
   ctx.fillRect(0, 0, width, height)
 

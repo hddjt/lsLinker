@@ -1,30 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  /* midnight forum palette */
-  --primary: #6670ff;
-  --primary-strong: #5560f4;
-  --accent: #7759ff;
-  --accent-soft: rgba(119, 89, 255, 0.2);
-  --primary-soft: rgba(102, 112, 255, 0.18);
-  --bg-0: #070b22;
-  --bg-1: #0b1232;
-  --bg-2: #152158;
-  --text: #c9d2f4;
-  --text-mute: #8792b7;
-  --text-h: #f2f4ff;
-  --line: rgba(151, 163, 255, 0.22);
-  --line-strong: rgba(172, 183, 255, 0.38);
-  --glass-bg: rgba(43, 51, 122, 0.55);
-  --glass-bg-hover: rgba(59, 70, 150, 0.66);
-  --glass-highlight: rgba(221, 226, 255, 0.12);
-  --header-bg: rgba(40, 48, 116, 0.76);
-  --field-bg: rgba(93, 104, 177, 0.34);
+  /* rain glass palette */
+  --primary: #34d5c3;
+  --primary-strong: #16b8aa;
+  --accent: #f2bf72;
+  --accent-soft: rgba(242, 191, 114, 0.18);
+  --primary-soft: rgba(52, 213, 195, 0.18);
+  --bg-0: #04131d;
+  --bg-1: #082435;
+  --bg-2: #123f48;
+  --text: #c7dedc;
+  --text-mute: #8da9aa;
+  --text-h: #f0fbf8;
+  --line: rgba(122, 226, 215, 0.2);
+  --line-strong: rgba(242, 191, 114, 0.36);
+  --glass-bg: rgba(13, 44, 57, 0.58);
+  --glass-bg-hover: rgba(19, 61, 73, 0.68);
+  --glass-highlight: rgba(213, 255, 248, 0.12);
+  --header-bg: rgba(7, 28, 42, 0.78);
+  --field-bg: rgba(20, 72, 83, 0.42);
   --danger: #ff6b7a;
   --ok: #37d39a;
   --radius: 18px;
   --ease: 200ms ease;
-  --shadow-card: 0 18px 48px -18px rgba(0, 0, 0, 0.62);
+  --shadow-card: 0 20px 52px -22px rgba(0, 18, 24, 0.76);
   --sans: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto,
     system-ui, sans-serif;
   --mono: ui-monospace, 'SFMono-Regular', Consolas, 'Courier New', monospace;
@@ -83,9 +83,9 @@ a {
   z-index: 0;
   overflow: hidden;
   background:
-    radial-gradient(1050px 700px at 35% 18%, rgba(94, 73, 214, 0.3), transparent 64%),
-    radial-gradient(1150px 720px at 73% 78%, rgba(32, 101, 163, 0.42), transparent 66%),
-    linear-gradient(155deg, #070b22 0%, #10134b 42%, #080d27 72%, #071022 100%);
+    radial-gradient(980px 640px at 28% 16%, rgba(52, 213, 195, 0.26), transparent 64%),
+    radial-gradient(1050px 700px at 76% 76%, rgba(242, 191, 114, 0.18), transparent 68%),
+    linear-gradient(155deg, #03111b 0%, #082335 42%, #061a28 72%, #04131d 100%);
 }
 .app-bg::before {
   content: '';
@@ -103,8 +103,8 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(5, 9, 29, 0.72), transparent 24%, transparent 76%, rgba(5, 9, 29, 0.52)),
-    linear-gradient(180deg, rgba(5, 8, 24, 0.12), rgba(5, 8, 24, 0.46));
+    linear-gradient(90deg, rgba(2, 11, 18, 0.7), transparent 24%, transparent 76%, rgba(2, 11, 18, 0.56)),
+    linear-gradient(180deg, rgba(3, 15, 24, 0.12), rgba(3, 15, 24, 0.48));
 }
 
 /* ============ 玻璃拟态卡片 ============ */
@@ -114,7 +114,10 @@ a {
   border-radius: var(--radius);
   backdrop-filter: blur(18px) saturate(145%);
   -webkit-backdrop-filter: blur(18px) saturate(145%);
-  box-shadow: var(--shadow-card), inset 0 1px 0 var(--glass-highlight);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 var(--glass-highlight),
+    inset 0 0 0 1px rgba(190, 255, 246, 0.03);
   position: relative;
 }
 
@@ -146,8 +149,9 @@ a {
   border-radius: inherit;
   background: radial-gradient(
     320px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(225, 230, 255, calc(0.1 + var(--pd, 0) * 0.14)),
-    transparent 60%
+    rgba(242, 191, 114, calc(0.08 + var(--pd, 0) * 0.1)),
+    rgba(52, 213, 195, calc(0.05 + var(--pd, 0) * 0.08)) 32%,
+    transparent 64%
   );
   opacity: 0;
   transition: opacity 220ms ease;
@@ -169,14 +173,14 @@ a {
   font: 500 13px/1 var(--sans);
   letter-spacing: 0;
   color: var(--text-h);
-  background: rgba(97, 109, 187, 0.22);
+  background: rgba(20, 72, 83, 0.3);
   cursor: pointer;
   transition: all var(--ease);
   user-select: none;
   white-space: nowrap;
 }
 .btn:hover {
-  background: rgba(116, 128, 211, 0.32);
+  background: rgba(33, 103, 107, 0.42);
   border-color: var(--line-strong);
   transform: translateY(-1px);
 }
@@ -189,14 +193,14 @@ a {
   transform: none;
 }
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), #7fd8c6 48%, var(--accent));
   border: none;
   color: #fff;
-  box-shadow: 0 10px 24px -8px rgba(102, 112, 255, 0.72);
+  box-shadow: 0 10px 26px -10px rgba(52, 213, 195, 0.7);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--primary-strong), var(--accent));
-  box-shadow: 0 12px 30px -8px rgba(119, 89, 255, 0.68);
+  background: linear-gradient(135deg, var(--primary-strong), #5fcfbd 48%, var(--accent));
+  box-shadow: 0 14px 32px -12px rgba(242, 191, 114, 0.62);
 }
 .btn-ghost {
   background: transparent;
@@ -204,7 +208,7 @@ a {
   color: var(--text-mute);
 }
 .btn-ghost:hover {
-  background: rgba(97, 109, 187, 0.2);
+  background: rgba(52, 213, 195, 0.12);
   color: var(--text-h);
 }
 .btn-danger {
@@ -269,7 +273,7 @@ textarea.input {
   font-size: 12px;
   color: var(--text-mute);
   border: 1px solid var(--line);
-  background: rgba(82, 94, 171, 0.2);
+  background: rgba(20, 72, 83, 0.28);
   cursor: pointer;
   transition: all var(--ease);
   user-select: none;
@@ -281,8 +285,8 @@ textarea.input {
 .chip.active {
   color: #fff;
   border-color: transparent;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 6px 18px -6px rgba(109, 141, 255, 0.55);
+  background: linear-gradient(135deg, #22c7b5, #f2bf72);
+  box-shadow: 0 8px 22px -9px rgba(52, 213, 195, 0.72);
 }
 
 .sidebar-item {
@@ -300,12 +304,12 @@ textarea.input {
 }
 .sidebar-item:hover {
   color: var(--text-h);
-  background: rgba(102, 112, 255, 0.12);
+  background: rgba(52, 213, 195, 0.12);
 }
 .sidebar-item.active {
   color: #fff;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 12px 28px -14px rgba(102, 112, 255, 0.82);
+  background: linear-gradient(135deg, #22c7b5, #f2bf72);
+  box-shadow: 0 12px 28px -14px rgba(52, 213, 195, 0.82);
   transform: translateX(2px);
 }
 .sidebar-icon {
@@ -347,13 +351,13 @@ textarea.input {
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(151, 163, 255, 0.22);
+  background: rgba(122, 226, 215, 0.22);
   border-radius: 999px;
   border: 3px solid transparent;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(172, 183, 255, 0.34);
+  background-color: rgba(242, 191, 114, 0.32);
 }
 ::-webkit-scrollbar-track {
   background: transparent;

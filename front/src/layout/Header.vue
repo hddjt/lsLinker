@@ -33,7 +33,7 @@ function submitLogin() {
     >
       <RouterLink to="/" class="flex items-center gap-2.5" title="lsLinker">
         <span
-          class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-[--primary] to-[--accent] text-sm font-bold text-white shadow-lg shadow-indigo-500/40"
+          class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-[--primary] to-[--accent] text-sm font-bold text-white shadow-lg shadow-teal-500/30"
         >
           L
         </span>
@@ -52,7 +52,7 @@ function submitLogin() {
         >
           <span
             class="absolute inset-0 rounded-lg opacity-0 transition-opacity"
-            :class="$route.path === n.to ? '!opacity-100 bg-gradient-to-br from-[--primary] to-[--accent] shadow-lg shadow-indigo-500/30' : ''"
+            :class="$route.path === n.to ? '!opacity-100 bg-gradient-to-br from-[--primary] to-[--accent] shadow-lg shadow-teal-500/25' : ''"
           />
           <span class="relative font-medium">{{ n.label }}</span>
           <span

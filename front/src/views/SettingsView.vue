@@ -231,7 +231,7 @@ function clearAll() {
   height: 26px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: rgba(82, 94, 171, 0.2);
+  background: rgba(20, 72, 83, 0.28);
   cursor: pointer;
   transition: background-color var(--ease), border-color var(--ease);
   padding: 0;
@@ -250,7 +250,7 @@ function clearAll() {
 .switch.on {
   border-color: transparent;
   background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 6px 18px -6px rgba(102, 112, 255, 0.72);
+  box-shadow: 0 6px 18px -6px rgba(52, 213, 195, 0.72);
 }
 .switch.on .knob {
   transform: translateX(20px);

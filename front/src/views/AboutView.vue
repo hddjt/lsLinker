@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto max-w-2xl">
     <div class="glass tilt overflow-hidden p-8 text-center" v-tilt :data-tilt="4" :data-tilt-shadow="16">
-      <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[--primary] to-[--accent] text-2xl font-bold text-white shadow-xl shadow-indigo-500/40">
+      <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[--primary] to-[--accent] text-2xl font-bold text-white shadow-xl shadow-teal-500/30">
         L
       </div>
       <h1 class="text-2xl">lsLinker</h1>

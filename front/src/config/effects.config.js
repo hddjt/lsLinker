@@ -36,11 +36,11 @@ export const glassRainEffect = {
     /* 关闭包自带雾化层，避免整体发灰 */
     mist: false,
     /* 折射背景：深色纯色贴图颜色 */
-    background: '#070b22',
+    background: '#04131d',
     /* 深色界面需要一点高光，否则雨滴只剩很浅的暗纹 */
-    raindropDiffuseLight: [0.34, 0.36, 0.48],
+    raindropDiffuseLight: [0.24, 0.38, 0.36],
     raindropShadowOffset: 0.66,
-    raindropSpecularLight: [0.3, 0.34, 0.5],
+    raindropSpecularLight: [0.28, 0.42, 0.38],
     raindropSpecularShininess: 180,
     raindropLightBump: 0.72,
   },
