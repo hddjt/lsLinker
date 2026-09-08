@@ -157,9 +157,9 @@ onUnmounted(() => {
 
     <!-- 房间内 -->
     <div v-else class="glass flex h-[62vh] flex-col overflow-hidden">
-      <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+      <div class="flex items-center justify-between border-b border-[--line] px-4 py-3">
         <div class="flex items-center gap-2">
-          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[#b06bff] to-[#6d8dff] text-xs font-bold text-white">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[--accent] to-[--primary] text-xs font-bold text-white">
             🔑
           </span>
           <div>
@@ -170,17 +170,17 @@ onUnmounted(() => {
         <button class="btn btn-ghost btn-sm" @click="quit">退出房间</button>
       </div>
 
-      <div class="flex gap-1 border-b border-white/10 px-3 pt-2">
+      <div class="flex gap-1 border-b border-[--line] px-3 pt-2">
         <button
           class="btn btn-sm rounded-b-none"
-          :class="tab === 'text' ? '!border-transparent !bg-white/10 !text-[--text-h]' : 'btn-ghost'"
+          :class="tab === 'text' ? '!border-transparent !bg-[--field-bg] !text-[--text-h]' : 'btn-ghost'"
           @click="tab = 'text'"
         >
           文本粘贴
         </button>
         <button
           class="btn btn-sm rounded-b-none"
-          :class="tab === 'file' ? '!border-transparent !bg-white/10 !text-[--text-h]' : 'btn-ghost'"
+          :class="tab === 'file' ? '!border-transparent !bg-[--field-bg] !text-[--text-h]' : 'btn-ghost'"
           @click="tab = 'file'"
         >
           小文件直传
@@ -204,7 +204,7 @@ onUnmounted(() => {
               class="max-w-[80%] px-3.5 py-2"
               :class="
                 t.self
-                  ? 'rounded-2xl rounded-br-md bg-gradient-to-br from-[#b06bff] to-[#8a54e8] text-white'
+                  ? 'rounded-2xl rounded-br-md bg-gradient-to-br from-[--accent] to-[--primary] text-white'
                   : 'glass !rounded-2xl !rounded-bl-md'
               "
             >
@@ -226,7 +226,7 @@ onUnmounted(() => {
             :key="f.id"
             class="glass !rounded-xl flex items-center gap-3 p-3"
           >
-            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white/[0.07] text-lg">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[--field-bg] text-lg">
               {{ f.name.endsWith('.zip') ? '🗜️' : f.name.endsWith('.pdf') ? '📄' : '📎' }}
             </span>
             <div class="min-w-0 flex-1">
@@ -243,9 +243,9 @@ onUnmounted(() => {
               <span class="truncate font-medium text-[--text-h]">{{ u.name }}</span>
               <span class="muted">{{ u.progress }}%</span>
             </div>
-            <div class="h-1.5 overflow-hidden rounded-full bg-white/10">
+            <div class="h-1.5 overflow-hidden rounded-full bg-[--field-bg]">
               <div
-                class="h-full rounded-full bg-gradient-to-r from-[#6d8dff] to-[#b06bff] transition-all duration-200"
+                class="h-full rounded-full bg-gradient-to-r from-[--primary] to-[--accent] transition-all duration-200"
                 :style="{ width: u.progress + '%' }"
               />
             </div>
@@ -258,7 +258,7 @@ onUnmounted(() => {
       </div>
 
       <!-- 输入区 -->
-      <div v-if="tab === 'text'" class="border-t border-white/10 p-3">
+      <div v-if="tab === 'text'" class="border-t border-[--line] p-3">
         <form class="flex items-center gap-2" @submit.prevent="sendText">
           <input
             v-model="textInput"
@@ -268,7 +268,7 @@ onUnmounted(() => {
           <button class="btn btn-primary shrink-0" :disabled="!textInput.trim()">发送</button>
         </form>
       </div>
-      <div v-else class="border-t border-white/10 p-3">
+      <div v-else class="border-t border-[--line] p-3">
         <UploadBox v-if="!uploading.length" @sending="onSending" @sent="onSent" />
         <p v-else class="muted py-2 text-center text-[12px]">正在上传，完成后自动写入会话…</p>
       </div>

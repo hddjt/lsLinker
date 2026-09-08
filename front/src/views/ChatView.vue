@@ -149,9 +149,9 @@ onUnmounted(() => {
 
     <!-- 房间内 -->
     <div v-else class="glass flex h-[60vh] flex-col overflow-hidden">
-      <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+      <div class="flex items-center justify-between border-b border-[--line] px-4 py-3">
         <div class="flex items-center gap-2">
-          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[#6d8dff] to-[#b06bff] text-xs font-bold text-white">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-[--primary] to-[--accent] text-xs font-bold text-white">
             C
           </span>
           <div>
@@ -180,7 +180,7 @@ onUnmounted(() => {
             class="max-w-[75%] px-3.5 py-2"
             :class="
               m.self
-                ? 'rounded-2xl rounded-br-md bg-gradient-to-br from-[#6d8dff] to-[#5a76e8] text-white'
+                ? 'rounded-2xl rounded-br-md bg-gradient-to-br from-[--primary] to-[--primary-strong] text-white'
                 : 'glass !rounded-2xl !rounded-bl-md'
             "
           >
@@ -192,7 +192,7 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <form class="flex items-center gap-2 border-t border-white/10 p-3" @submit.prevent="submit">
+      <form class="flex items-center gap-2 border-t border-[--line] p-3" @submit.prevent="submit">
         <input
           v-model="textInput"
           class="input flex-1"

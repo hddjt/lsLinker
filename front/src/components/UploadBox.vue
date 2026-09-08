@@ -71,8 +71,8 @@ function onChoose(e) {
       class="grid min-h-[160px] cursor-pointer place-items-center rounded-xl border border-dashed p-6 text-center transition-colors"
       :class="
         dragging
-          ? 'border-[#8fa6ff] bg-[#6d8dff]/10'
-          : 'border-white/15 hover:border-white/30 hover:bg-white/[0.03]'
+          ? 'border-[--primary] bg-[--primary-soft]'
+          : 'border-[--line] hover:border-[--line-strong] hover:bg-[--field-bg]'
       "
       @dragenter.prevent="dragging = true"
       @dragover.prevent="dragging = true"

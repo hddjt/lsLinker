@@ -111,7 +111,7 @@ function onDeletePost(p) {
             {{ p.body }}
           </p>
           <div class="mt-3 flex items-center gap-2 text-[12px] text-[--text-mute]">
-            <span class="font-medium text-[#8fa6ff]">{{ p.author }}</span>
+            <span class="font-medium text-[--primary]">{{ p.author }}</span>
             <span class="dot-sep">·</span>
             <span>{{ timeAgo(p.time) }}</span>
             <span class="dot-sep">·</span>
@@ -142,7 +142,7 @@ function onDeletePost(p) {
           </button>
         </div>
         <div class="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[--text-mute]">
-          <span class="font-medium text-[#8fa6ff]">{{ selected.author }}</span>
+          <span class="font-medium text-[--primary]">{{ selected.author }}</span>
           <span class="dot-sep">·</span>
           <span>{{ timeAgo(selected.time) }}</span>
           <span class="dot-sep">·</span>
@@ -154,7 +154,7 @@ function onDeletePost(p) {
         <div class="mt-5 flex items-center gap-2">
           <button
             class="btn"
-            :class="isLiked(selected.id) ? '!border-transparent !bg-[#b06bff]/25 !text-[--text-h]' : ''"
+            :class="isLiked(selected.id) ? '!border-transparent !bg-[--accent-soft] !text-[--text-h]' : ''"
             @click="likePost(selected.id)"
           >
             {{ isLiked(selected.id) ? '👍 已赞' : '👍 点赞' }}
@@ -177,7 +177,7 @@ function onDeletePost(p) {
         <div class="flex flex-col gap-3">
           <div v-for="r in activeReplies" :key="r.id" class="glass p-4">
             <div class="mb-1.5 flex items-center gap-2 text-[12px] text-[--text-mute]">
-              <span class="font-medium text-[#8fa6ff]">{{ r.author }}</span>
+              <span class="font-medium text-[--primary]">{{ r.author }}</span>
               <span class="dot-sep">·</span>
               <span>{{ timeAgo(r.time) }}</span>
             </div>

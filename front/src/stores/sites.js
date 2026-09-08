@@ -29,11 +29,12 @@ function persist() {
   writeLS('sites', state.sites)
 }
 
-export function addSite({ name, url, desc, category }) {
+export function addSite({ name, url, desc, category, icon }) {
   const site = {
     id: uid('s'),
     name: name.trim(),
     url: normalizeUrl(url),
+    icon: (icon || '').trim(),
     desc: desc.trim(),
     category,
     clicks: 0,
@@ -49,6 +50,7 @@ export function updateSite(id, patch) {
   if (!s) return
   Object.assign(s, patch)
   if (patch.url) s.url = normalizeUrl(patch.url)
+  if (patch.icon !== undefined) s.icon = (patch.icon || '').trim()
   persist()
 }
 

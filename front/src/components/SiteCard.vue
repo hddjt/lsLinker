@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { siteIcon, timeAgo } from '../utils/storage'
 import { addClick } from '../stores/sites'
 import { isSiteFav, toggleSite } from '../stores/favorites'
@@ -11,6 +11,15 @@ const props = defineProps({
 const emit = defineEmits(['edit', 'delete'])
 
 const cat = computed(() => categoryById(props.site.category))
+const iconSrc = computed(() => props.site.icon || siteIcon(props.site.url))
+const imgFailed = ref(false)
+
+watch(
+  () => [props.site.icon, props.site.url],
+  () => {
+    imgFailed.value = false
+  },
+)
 </script>
 
 <template>
@@ -18,12 +27,12 @@ const cat = computed(() => categoryById(props.site.category))
     <div class="flex items-start gap-3">
       <div class="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-white/[0.07] ring-1 ring-white/10">
         <img
-          v-if="site.url"
-          :src="siteIcon(site.url)"
+          v-if="iconSrc && !imgFailed"
+          :src="iconSrc"
           alt=""
           class="h-6 w-6 object-contain"
           loading="lazy"
-          @error="($event.target.style.display = 'none')"
+          @error="imgFailed = true"
         />
         <span v-else class="text-sm font-bold text-[--text-h]">
           {{ site.name[0] }}
@@ -34,7 +43,7 @@ const cat = computed(() => categoryById(props.site.category))
           :href="site.url"
           target="_blank"
           rel="noopener"
-          class="block truncate text-[15px] font-semibold text-[--text-h] transition-colors hover:text-[#8fa6ff]"
+          class="block truncate text-[15px] font-semibold text-[--text-h] transition-colors hover:text-[--primary]"
           @click="addClick(site.id)"
         >
           {{ site.name }}

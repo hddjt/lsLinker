@@ -5,6 +5,7 @@ import FavoritesView from '../views/FavoritesView.vue'
 import AboutView from '../views/AboutView.vue'
 import ChatView from '../views/ChatView.vue'
 import TransferView from '../views/TransferView.vue'
+import SettingsView from '../views/SettingsView.vue'
 
 const routes = [
   { path: '/', name: 'nav', component: Home, meta: { title: '导航' } },
@@ -12,6 +13,7 @@ const routes = [
   { path: '/favorites', name: 'favorites', component: FavoritesView, meta: { title: '收藏' } },
   { path: '/chat', name: 'chat', component: ChatView, meta: { title: '聊天' } },
   { path: '/transfer', name: 'transfer', component: TransferView, meta: { title: '中转' } },
+  { path: '/settings', name: 'settings', component: SettingsView, meta: { title: '设置' } },
   { path: '/about', name: 'about', component: AboutView, meta: { title: '关于' } },
 ]
 

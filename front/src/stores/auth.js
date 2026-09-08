@@ -15,6 +15,13 @@ export function login(nickname) {
   writeLS('auth', { nickname: name, token: state.token })
 }
 
+export function setNickname(nickname) {
+  const name = nickname.trim()
+  if (!name) return
+  state.nickname = name
+  writeLS('auth', { nickname: state.nickname, token: state.token })
+}
+
 export function logout() {
   state.nickname = ''
   state.token = ''

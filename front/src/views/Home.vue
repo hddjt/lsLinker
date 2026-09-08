@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import SiteCard from '../components/SiteCard.vue'
 import SiteFormModal from '../components/SiteFormModal.vue'
 import BaseModal from '../components/BaseModal.vue'
@@ -9,6 +10,7 @@ import { useSiteFilter } from '../composables/useSiteFilter'
 
 const { categories, sites } = useSites()
 const { kw, activeCat, filtered, grouped, catCounts, isEmpty, noMatch } = useSiteFilter(sites, categories)
+const route = useRoute()
 
 const loggedIn = computed(isLoggedIn)
 const showForm = ref(false)
@@ -36,6 +38,15 @@ function confirmDelete() {
   pendingDelete.value = null
   showDel.value = false
 }
+
+watch(
+  () => route.query.cat,
+  (cat) => {
+    const id = String(cat || 'all')
+    activeCat.value = id === 'all' || categories.some((c) => c.id === id) ? id : 'all'
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -108,7 +119,7 @@ function confirmDelete() {
         <span class="muted text-[12px]">{{ g.list.length }} 个</span>
         <span class="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
       </div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         <SiteCard
           v-for="s in g.list"
           :key="s.id"

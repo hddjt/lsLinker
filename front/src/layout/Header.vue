@@ -27,11 +27,13 @@ function submitLogin() {
 </script>
 
 <template>
-  <header class="sticky top-0 z-40">
-    <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+  <header class="sticky top-0 z-40 px-4">
+    <div
+      class="mx-auto mt-4 flex max-w-[1600px] items-center gap-3 rounded-3xl border border-[--line-strong] bg-[--header-bg] px-5 py-3 shadow-2xl shadow-black/30 backdrop-blur-xl"
+    >
       <RouterLink to="/" class="flex items-center gap-2.5" title="lsLinker">
         <span
-          class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-[#6d8dff] to-[#b06bff] text-sm font-bold text-white shadow-lg shadow-indigo-500/40"
+          class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-[--primary] to-[--accent] text-sm font-bold text-white shadow-lg shadow-indigo-500/40"
         >
           L
         </span>
@@ -50,7 +52,7 @@ function submitLogin() {
         >
           <span
             class="absolute inset-0 rounded-lg opacity-0 transition-opacity"
-            :class="$route.path === n.to ? '!opacity-100 bg-white/[0.07]' : ''"
+            :class="$route.path === n.to ? '!opacity-100 bg-gradient-to-br from-[--primary] to-[--accent] shadow-lg shadow-indigo-500/30' : ''"
           />
           <span class="relative font-medium">{{ n.label }}</span>
           <span
@@ -63,10 +65,18 @@ function submitLogin() {
       </nav>
 
       <div class="flex items-center gap-2">
+        <RouterLink
+          to="/settings"
+          class="btn btn-ghost btn-icon btn-sm"
+          title="个人设置"
+          active-class="!text-[--primary]"
+        >
+          ⚙️
+        </RouterLink>
         <template v-if="auth.token">
           <div class="flex items-center gap-2">
             <span
-              class="grid h-7 w-7 place-items-center rounded-full bg-white/[0.1] text-xs font-bold text-[--text-h] ring-1 ring-white/10"
+              class="grid h-7 w-7 place-items-center rounded-full bg-[--field-bg] text-xs font-bold text-[--text-h] ring-1 ring-white/10"
             >
               {{ initials(auth.nickname) }}
             </span>
@@ -81,7 +91,6 @@ function submitLogin() {
         </button>
       </div>
     </div>
-    <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
   </header>
 
   <Teleport to="body">

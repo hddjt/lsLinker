@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto max-w-2xl">
     <div class="glass tilt overflow-hidden p-8 text-center" v-tilt :data-tilt="4" :data-tilt-shadow="16">
-      <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[#6d8dff] to-[#b06bff] text-2xl font-bold text-white shadow-xl shadow-indigo-500/40">
+      <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[--primary] to-[--accent] text-2xl font-bold text-white shadow-xl shadow-indigo-500/40">
         L
       </div>
       <h1 class="text-2xl">lsLinker</h1>
@@ -21,7 +21,7 @@
       <h2 class="mb-3 text-[15px] font-semibold">功能简介</h2>
       <ul class="flex flex-col gap-2 text-[13px] text-[--text]">
         <li v-for="(t, i) in intro" :key="i" class="flex gap-2">
-          <span class="text-[#8fa6ff]">•</span>
+          <span class="text-[--primary]">•</span>
           <span>{{ t }}</span>
         </li>
       </ul>
@@ -40,7 +40,7 @@
         <div v-for="s in stages" :key="s.name" class="flex items-center gap-3 text-[13px]">
           <span
             class="grid h-6 w-6 shrink-0 place-items-center rounded-full text-[11px] font-bold"
-            :class="s.done ? 'bg-[#37d39a]/20 text-[#37d39a]' : 'bg-white/10 text-[--text-mute]'"
+            :class="s.done ? 'bg-[--ok]/20 text-[--ok]' : 'bg-[--field-bg] text-[--text-mute]'"
           >
             {{ s.done ? '✓' : '•' }}
           </span>

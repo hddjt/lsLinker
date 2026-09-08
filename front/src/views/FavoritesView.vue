@@ -65,7 +65,7 @@ function onDeletePost(p) {
           </div>
           <p class="muted mt-1 line-clamp-2 whitespace-pre-wrap text-[13px]">{{ p.body }}</p>
           <div class="mt-3 flex items-center gap-2 text-[12px] text-[--text-mute]">
-            <span class="font-medium text-[#8fa6ff]">{{ p.author }}</span>
+            <span class="font-medium text-[--primary]">{{ p.author }}</span>
             <span class="dot-sep">·</span>
             <span>{{ timeAgo(p.time) }}</span>
             <span class="dot-sep">·</span>
