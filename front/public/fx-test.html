@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>effects-toggle-test</title>
+</head>
+<body>
+  <pre id="status">running</pre>
+  <script type="module">
+    const status = document.getElementById('status')
+    const errors = []
+    window.addEventListener('error', (e) => errors.push(String(e.message || e.error)))
+
+    const store = await import('/src/stores/effects.js')
+    store.setEffectEnabled(true)
+
+    const { default: RainGlass } = await import('/src/components/RainGlass.vue')
+    const { createApp } = await import('/node_modules/.vite/deps/vue.js')
+    const host = document.createElement('div')
+    document.body.appendChild(host)
+    const app = createApp(RainGlass)
+    app.mount(host)
+    const canvas = host.querySelector('canvas')
+
+    await new Promise((r) => setTimeout(r, 1500))
+    const on = { w: canvas.width, h: canvas.height, display: canvas.style.display }
+
+    store.setEffectEnabled(false)
+    await new Promise((r) => setTimeout(r, 300))
+    const off = { w: canvas.width, h: canvas.height, display: canvas.style.display }
+
+    store.setEffectEnabled(true)
+    await new Promise((r) => setTimeout(r, 1500))
+    const again = { w: canvas.width, h: canvas.height, display: canvas.style.display }
+
+    status.textContent = JSON.stringify({ on, off, again, errors })
+  </script>
+</body>
+</html>

@@ -50,6 +50,17 @@ body {
   overflow-x: hidden;
 }
 
+#app {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+}
+
+.app-content {
+  position: relative;
+  z-index: 2;
+}
+
 h1,
 h2,
 h3,
@@ -69,7 +80,7 @@ a {
 .app-bg {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   overflow: hidden;
   background:
     radial-gradient(1050px 700px at 35% 18%, rgba(94, 73, 214, 0.3), transparent 64%),

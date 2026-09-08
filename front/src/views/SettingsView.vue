@@ -3,9 +3,11 @@ import { ref, reactive, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth, setNickname, login, logout } from '../stores/auth'
 import { initials } from '../utils/storage'
+import { useEffects, toggleEffect } from '../stores/effects'
 
 const auth = useAuth()
 const router = useRouter()
+const effects = useEffects()
 
 const nickForm = reactive({ name: '' })
 watch(
@@ -173,6 +175,29 @@ function clearAll() {
     </div>
 
     <div class="glass mt-6 p-6">
+      <h2 class="mb-1 text-[15px] font-semibold">动态效果</h2>
+      <p class="muted mb-4 text-[12px]">雨打玻璃背景（WebGL2 全屏叠层），关闭可降低显卡与电量开销。</p>
+
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <p class="text-[13px] text-[--text-h]">动态背景</p>
+          <p class="muted mt-0.5 text-[12px]">
+            {{ effects.enabled ? '当前已开启 · 雨滴折射 + 光影' : '当前已关闭' }}
+          </p>
+        </div>
+        <button
+          class="switch"
+          :class="{ on: effects.enabled }"
+          role="switch"
+          :aria-checked="effects.enabled"
+          @click="toggleEffect"
+        >
+          <span class="knob" />
+        </button>
+      </div>
+    </div>
+
+    <div class="glass mt-6 p-6">
       <h2 class="mb-1 text-[15px] font-semibold">数据管理</h2>
       <p class="muted mb-4 text-[12px]">当前数据保存在浏览器 localStorage，建议定期导出备份。</p>
 
@@ -197,3 +222,38 @@ function clearAll() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.switch {
+  position: relative;
+  flex: none;
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(82, 94, 171, 0.2);
+  cursor: pointer;
+  transition: background-color var(--ease), border-color var(--ease);
+  padding: 0;
+}
+.switch .knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--text-mute);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  transition: transform 180ms ease, background-color var(--ease);
+}
+.switch.on {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 6px 18px -6px rgba(102, 112, 255, 0.72);
+}
+.switch.on .knob {
+  transform: translateX(20px);
+  background: #fff;
+}
+</style>
